@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+
+	<body>
+		<div id="divBotao">
+			<button id="botaoCarregar">Mostrar cerveja</button>
+		</div>
+
+		<div id="divCerveja" style="opacity: 0; transition: opacity 1s"></div>
+	</body>
+
+	<script>
+		function carregarDiv() {
+			let div = document.getElementById("divCerveja");
+
+			if (div.innerHTML == "") {
+				div.innerHTML = "<h1>Guinness</h1>";
+
+				setTimeout(function () {
+					div.style.opacity = 1;
+				}, 10);
+			} else {
+				div.style.opacity = 0;
+
+				setTimeout(function () {
+					div.innerHTML = "";
+				}, 1000);
+			}
+		}
+		
+		let botao = document.getElementById("botaoCarregar");
+		botao.addEventListener("click", carregarDiv);
+	</script>
+</html>
