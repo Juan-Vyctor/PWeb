@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<div>
+            <a href="#" id="botaoCarregar">
+                Mostrar cachaças
+            </a>
+			<a href="#" id="botaoOrdenar">
+                Mostrar cachaças ordenadas
+            </a>
+			<a href="#" id="botaoEmbaralhar">
+                Embaralhar cachaças
+            </a>
+		</div>
+
+		<div id="meu amor" style="margin-top: 20px"></div>
+
+		<a style="display: block" href="../index.html"> Voltar </a>
+	</body>
+	<script>
+		let cachacas = ["Salinas", "Seleta", "Leblon"];
+
+		const transformar = (item) => {
+			return `
+				<tr>
+					<td style="border: 1px solid black; padding: 10px;">
+						${item}
+					</td>
+				</tr>
+			`;
+		};
+
+		const carregarDiv = () => {
+			let div = document.getElementById("meu amor");
+			let cachacasHtml = cachacas.map(transformar);
+			div.innerHTML = `
+				<table style="border-collapse: collapse;">
+					<tr>
+						<th style="
+							border: 1px solid black;
+							padding: 10px;
+							background-color: lightgray;
+						">
+							Cachaça
+						</th>
+					</tr>
+					${cachacasHtml.join("")}
+				</table>
+			`;
+		};
+
+		const ordenarCachacas = () => {
+			cachacas.sort();
+			carregarDiv();
+		};
+
+		const embaralharCachacas = () => {
+			cachacas.sort(() => Math.random() - 0.5);
+			carregarDiv();
+		};
+
+		let botaoCarregar = document.getElementById("botaoCarregar");
+		let botaoOrdenar = document.getElementById("botaoOrdenar");
+		let botaoEmbaralhar = document.getElementById("botaoEmbaralhar");
+
+		botaoCarregar.addEventListener("click", carregarDiv);
+		botaoOrdenar.addEventListener("click", ordenarCachacas);
+		botaoEmbaralhar.addEventListener("click", embaralharCachacas);
+	</script>
+</html>
