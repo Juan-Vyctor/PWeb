@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+	<body style="font-family: Arial, sans-serif; text-align: center">
+		<h1>Dinossauros Extintos</h1>
+		<div style="margin-bottom: 20px">
+			<button
+				id="botaoCarregar"
+				style="padding: 10px 20px; font-size: 16px; cursor: pointer"
+			>
+				Carregar dinossauro
+			</button>
+		</div>
+		<div
+			id="dinossauroDiv"
+			style="
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+			"
+		></div>
+		<a style="display: block; margin-top: 20px" href="../index.html">
+			Voltar
+		</a>
+	</body>
+
+	<script src="funcoes.js"></script>
+	<script>
+		        let dinossauro = [];
+		        async function carregarDinossauro() {
+			try {
+				let res = await fetch(
+					"https://extinct-api.herokuapp.com/api/v1/animal/",
+				);
+
+				const dados = await res.json();
+				dinossauro = dados.data;
+
+				carregarDiv(dinossauro);
+			} catch(error) {
+                document.getElementById("dinossauroDiv").innerHTML = "Fudeu..."
+            }
+		}
+
+		let botao = document.getElementById("botaoCarregar");
+		botao.addEventListener("click", () => carregarDinossauro());
+	</script>
+</html>
