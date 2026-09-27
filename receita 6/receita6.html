@@ -7,19 +7,79 @@
 		<div>
 			<button id="botaoCarregar">Carregando cervejas...</button>
 		</div>
+
 		<div id="cervejasDiv"></div>
+
+		<a style="display: block" href="../index.html">Voltar</a>
 	</body>
 
 	<script>
-		let cervejas = ["Guiness", "Desperados", "Becks"];
-        
+		let cervejas = [
+			{
+				name: "Guiness",
+				alcohol: "10%",
+			},
+			{
+				name: "Desperados",
+				alcohol: "6%",
+			},
+			{
+				name: "Becks",
+				alcohol: "5%",
+			},
+		];
+		// cs é um array de cervejas
 		const carregarDiv = (cs) => {
 			const div = document.getElementById("cervejasDiv");
 
-			const itensHtml = cs.map((item) => `<div>${item}</div>`);
+			const itensHtml = cs.map(
+				(item) => `
+					<tr>
+						<td style="border: 1px solid black; padding: 10px;">
+							${item["name"]}
+						</td>
 
-			div.innerHTML = `${itensHtml.join("\n")}`;
+						<td style="border: 1px solid black; padding: 10px;">
+							${item["alcohol"]}
+						</td>
+					</tr>
+				`,
+			);
+			div.innerHTML = `
+				<table
+					style="
+						border-collapse: collapse;
+						margin-top: 20px;
+						text-align: center;
+					"
+				>
+					<tr>
+						<th
+							style="
+								border: 1px solid black;
+								padding: 10px;
+								background-color: lightgray;
+							"
+						>
+							Nome
+						</th>
+
+						<th
+							style="
+								border: 1px solid black;
+								padding: 10px;
+								background-color: lightgray;
+							"
+						>
+							Álcool
+						</th>
+					</tr>
+
+					${itensHtml.join("\n")}
+				</table>
+			`;
 		};
+
 		let botao = document.getElementById("botaoCarregar");
 		botao.addEventListener("click", () => carregarDiv(cervejas));
 	</script>
