@@ -29,19 +29,24 @@
 	<script src="funcoes.js"></script>
 	<script>
 		let dinossauro = [];
-		async function carregarDinossauro() {
-			try {
-				let res = await fetch(
-					"https://extinct-api.herokuapp.com/api/v1/animal/",
+
+		function carregarDinossauro2() {
+			fetch("https://extinct-api.herokuapp.com/api/v1/animal/")
+				.then((res) => res.json())
+				.then((json) => {
+					dinossauro = json.data;
+					carregarDiv(dinossauro);
+				})
+				.catch(
+					(err) =>
+						(document.getElementById("dinossauroDiv").innerHTML =
+							`Erro ao carregar dinossauro: ${err}`),
 				);
-				const dados = await res.json();
-				dinossauro = dados.data;
-				carregarDiv(dinossauro);
-			} catch (error) {
-				document.getElementById("dinossauroDiv").innerHTML = "Fudeu...";
-			}
+			document.getElementById("dinossauroDiv").innerHTML =
+				`Fazendo requisição`;
 		}
+
 		let botao = document.getElementById("botaoCarregar");
-		botao.addEventListener("click", () => carregarDinossauro());
+		botao.addEventListener("click", () => carregarDinossauro2());
 	</script>
 </html>
