@@ -18,33 +18,66 @@
 			{
 				name: "Guiness",
 				alcohol: "10%",
+				style: "Imperial Stout",
+				ibu: "40",
 			},
 			{
 				name: "Desperados",
 				alcohol: "6%",
+				style: "Lager",
+				ibu: "25",
 			},
 			{
 				name: "Becks",
 				alcohol: "5%",
+				style: "Pilsen",
+				ibu: "20",
 			},
 		];
 		// cs é um array de cervejas
-		const carregarDiv = (cs) => {
-			const div = document.getElementById("cervejasDiv");
+		const carregarDiv = (
+			cs,
+			id = "cervejasDiv",
+			cabecalhos = ["Nome", "Álcool", "Estilo", "Amargor"],
+			propriedades = ["name", "alcohol", "style", "ibu"],
+		) => {
+			const div = document.getElementById(id);
+
+			const cabecalhosHtml = cabecalhos.map(
+				(item) => `
+					<th
+						style="
+							border: 1px solid black;
+							padding: 10px;
+							background-color: lightgray;
+						"
+					>
+						${item}
+					</th>
+				`,
+			);
 
 			const itensHtml = cs.map(
 				(item) => `
 					<tr>
-						<td style="border: 1px solid black; padding: 10px;">
-							${item["name"]}
-						</td>
-
-						<td style="border: 1px solid black; padding: 10px;">
-							${item["alcohol"]}
-						</td>
+						${propriedades
+							.map(
+								(propriedade) => `
+								<td
+									style="
+										border: 1px solid black;
+										padding: 10px;
+									"
+								>
+									${item[propriedade]}
+								</td>
+							`,
+							)
+							.join("\n")}
 					</tr>
 				`,
 			);
+
 			div.innerHTML = `
 				<table
 					style="
@@ -54,32 +87,13 @@
 					"
 				>
 					<tr>
-						<th
-							style="
-								border: 1px solid black;
-								padding: 10px;
-								background-color: lightgray;
-							"
-						>
-							Nome
-						</th>
-
-						<th
-							style="
-								border: 1px solid black;
-								padding: 10px;
-								background-color: lightgray;
-							"
-						>
-							Álcool
-						</th>
+						${cabecalhosHtml.join("\n")}
 					</tr>
 
 					${itensHtml.join("\n")}
 				</table>
 			`;
 		};
-
 		let botao = document.getElementById("botaoCarregar");
 		botao.addEventListener("click", () => carregarDiv(cervejas));
 	</script>
