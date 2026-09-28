@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>ReceitaReact - 3</title>
+	</head>
+
+	<body>
+		<div id="app"></div>
+		<script src="../libs/react.js"></script>
+		<script src="../libs/react-dom.js"></script>
+		<script src="../libs/babel.js"></script>
+
+		<script type="text/babel">
+			const TabelaBebidas = ({ titulo, cabecalhos, cachacas }) => {
+				let head = cabecalhos.map((cabecalho) => {
+					return <th key={cabecalho}>{cabecalho}</th>;
+				});
+				let body = cachacas.map((cachaca, index) => {
+					return (
+						<tr key={index}>
+							{cachaca.map((campo) => (
+								<td key={campo}>{campo}</td>
+							))}
+						</tr>
+					);
+				});
+
+				return (
+					<div>
+						<h1>{titulo}</h1>
+
+						<table id="tabela" border="1">
+							<thead>
+								<tr>{head}</tr>
+							</thead>
+							<tbody>{body}</tbody>
+						</table>
+						<a href="../../../index.html">Voltar</a>
+					</div>
+				);
+			};
+
+			const valoresCabecalhos = ["Nome", "Marca", "Ano"];
+			const valoresCachacas = [
+				["Cerveja", "Skol", "1200"],
+				["Energético", "Skol Beats", "2077"],
+			];
+
+			ReactDOM.render(
+				<TabelaBebidas
+					titulo="minha tabela de cana"
+					cabecalhos={valoresCabecalhos}
+					cachacas={valoresCachacas}
+				/>,
+
+				document.getElementById("app"),
+			);
+		</script>
+	</body>
+</html>

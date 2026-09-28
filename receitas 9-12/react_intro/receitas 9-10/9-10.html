@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Matéria toda(?)</title>
+	</head>
+	<body>
+		<div id="app"></div>
+
+		<script src="../libs/react.js"></script>
+		<script src="../libs/react-dom.js"></script>
+		<script src="../libs/babel.js"></script>
+
+		<script type="text/babel">
+			function Cabecalho() {
+				return <h1>Minha tabela de bebidas sla porra Fabrício</h1>;
+			}
+
+			function Tabela({ cachacas }) {
+				const [mostrarTabela, setMostrarTabela] = React.useState(false);
+
+				let tabela = cachacas.map((cachaca) => {
+					return (
+						<tr id={cachaca[0]} key={cachaca[0]}>
+							<td>{cachaca[0]}</td>
+							<td>{cachaca[1]}</td>
+						</tr>
+					);
+				});
+
+				let exibicao = (
+					<table id="tabela" border="1">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Marca</th>
+							</tr>
+						</thead>
+						<tbody>{tabela}</tbody>
+					</table>
+				);
+
+				return (
+					<div id="app">
+						<Cabecalho />
+						
+						<button
+						onClick={() => setMostrarTabela(!mostrarTabela)}
+						>
+						{mostrarTabela ? "Esconder" : "Mostrar"} tabela
+						</button>
+						
+						{mostrarTabela && exibicao}
+						<a href="../../../index.html">Voltar</a>
+					</div>
+				);
+			}
+
+			const itens = [
+				["cerveja", "1"],
+				["bebida", "2"],
+			];
+
+			ReactDOM.render(
+				<Tabela cachacas={itens} />,
+
+				document.getElementById("app"),
+			);
+		</script>
+	</body>
+</html>
