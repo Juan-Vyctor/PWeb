@@ -24,9 +24,6 @@ export default function MovieForm() {
 		<div>
 			<form onSubmit={pesquisar}>
 				<div>
-					URL: {url}
-				</div>
-				<div>
 					<div>titleSearchKey: {titleSearchKey}</div>
 					<label htmlFor="idTitleSearchKey">Título</label>
 					<input
