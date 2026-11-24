@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function MovieForm() {
 	const [titleSearchKey, setTitleSearchKey] = useState("");
@@ -51,8 +53,18 @@ export default function MovieForm() {
 				{!loading &&
 					movies.map((m) => (
 						<div key={m.imdbID}>
-							{m.Title} --- {m.Year}
-							<img src={m.Poster} style={{ display: "block" }} />
+							<Link href={`/movie/${m.imdbID}`}>
+								{m.Title} --- {m.Year}
+							</Link>
+							{m.Poster && m.Poster != "N/A" && (
+								<Image
+									src={m.Poster}
+									alt={`Poster do filme ${m.Title}`}
+									width={300}
+									height={445}
+									style={{ display: "block", height: "auto" }}
+								/>
+							)}
 						</div>
 					))}
 			</div>

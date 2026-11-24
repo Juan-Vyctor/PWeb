@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function MovieFormApi() {
 	const [titleSearchKey, setTitleSearchKey] = useState("");
@@ -8,12 +10,12 @@ export default function MovieFormApi() {
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	// Agora a requisição vai para a nossa própria API (app/api/route.js),
+	// Agora a requisição vai para a nossa própria API (app/api/movieSearch/route.js),
 	// e não mais diretamente para o OMDb
 	const params = new URLSearchParams();
 	if (titleSearchKey != "") params.set("titleSearchKey", titleSearchKey);
 	if (yearSearchKey != "") params.set("yearSearchKey", yearSearchKey);
-	const url = `/api?${params.toString()}`;
+	const url = `/api/movieSearch?${params.toString()}`;
 
 	async function pesquisar(event) {
 		event.preventDefault();
@@ -59,11 +61,16 @@ export default function MovieFormApi() {
 				{!loading &&
 					movies.map((m) => (
 						<div key={m.imdbID}>
-							{m.Title} --- {m.Year}
-							{m.Poster && (
-								<img
+							<Link href={`/movie/${m.imdbID}`}>
+								{m.Title} --- {m.Year}
+							</Link>
+							{m.Poster && m.Poster != "N/A" && (
+								<Image
 									src={m.Poster}
-									style={{ display: "block" }}
+									alt={`Poster do filme ${m.Title}`}
+									width={300}
+									height={445}
+									style={{ display: "block", height: "auto" }}
 								/>
 							)}
 						</div>

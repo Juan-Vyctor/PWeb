@@ -1,4 +1,4 @@
-import { buscarFilmes } from "../../lib/banco";
+import { buscarFilmes } from "../../../lib/banco";
 
 export async function GET(request) {
 	const searchParams = request.nextUrl.searchParams;
